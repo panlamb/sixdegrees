@@ -10,6 +10,7 @@ export default function HomePage() {
   const [chains, setChains] = useState<Chain[]>([])
   const [pendingCount, setPendingCount] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [globalStats, setGlobalStats] = useState({ chains: 0, verifications: 0, countries: 0 })
   const supabase = createClient()
   const router = useRouter()
 
@@ -30,15 +31,31 @@ export default function HomePage() {
       .select('*', { count: 'exact', head: true })
       .eq('status', 'pending')
 
+    // Load global stats
+    const { count: chainCount } = await supabase
+      .from('chains')
+      .select('*', { count: 'exact', head: true })
+
+    const { count: verifyCount } = await supabase
+      .from('verifications')
+      .select('*', { count: 'exact', head: true })
+      .eq('status', 'confirmed')
+
+    setGlobalStats({
+      chains: chainCount || 0,
+      verifications: verifyCount || 0,
+      countries: 0
+    })
+
     setChains(chains || [])
     setPendingCount(count || 0)
     setLoading(false)
   }
 
   const stats = [
-    { label: 'Avg Degrees', value: '4.2' },
-    { label: 'Verified Chains', value: '1.2M' },
-    { label: 'Countries', value: '138' },
+    { label: 'Chains Started', value: globalStats.chains.toString() },
+    { label: 'Verified Links', value: globalStats.verifications.toString() },
+    { label: 'Active Now', value: chains.filter(c => c.status === 'active').length.toString() },
   ]
 
   return (
