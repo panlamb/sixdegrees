@@ -108,7 +108,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 {chain.links && chain.links.length > 0 && (
-                  <ChainNodes steps={chain.links.sort((a, b) => a.position - b.position)} />
+                  <ChainNodes steps={chain.links.sort((a, b) => a.position - b.position) as any} />
                 )}
                 {chain.status === 'active' && (
                   <div className="mt-3 font-mono text-xs text-[#666]">Waiting for verifications</div>
