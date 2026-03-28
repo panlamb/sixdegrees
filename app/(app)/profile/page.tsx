@@ -42,6 +42,13 @@ export default function ProfilePage() {
     setLoading(false)
   }
 
+  async function deleteChain(id: string) {
+    await supabase.from('chain_links').delete().eq('chain_id', id)
+    await supabase.from('chains').delete().eq('id', id)
+    setMyChains(prev => prev.filter(c => c.id !== id))
+    setParticipatingChains(prev => prev.filter(c => c.id !== id))
+  }
+
   async function saveProfile() {
     if (!profile) return
     setSaving(true)
@@ -96,19 +103,21 @@ export default function ProfilePage() {
             <div className="text-center"><div className="font-mono text-2xl">{totalDegrees || '—'}</div><div className="font-mono text-xs text-[#555] mt-1">avg degrees</div></div>
           </div>
         </div>
-        {myChains.length > 0 && <div><div className="font-mono text-xs text-[#555] uppercase tracking-widest mb-3">Chains I started</div><div className="space-y-2">{myChains.map((chain: any) => <ChainRow key={chain.id} chain={chain} />)}</div></div>}
-        {participatingChains.length > 0 && <div><div className="font-mono text-xs text-[#555] uppercase tracking-widest mb-3">Chains I'm in</div><div className="space-y-2">{participatingChains.map((chain: any) => <ChainRow key={chain.id} chain={chain} />)}</div></div>}
+        {myChains.length > 0 && <div><div className="font-mono text-xs text-[#555] uppercase tracking-widest mb-3">Chains I started</div><div className="space-y-2">{myChains.map((chain: any) => <ChainRow key={chain.id} chain={chain} onDelete={deleteChain} />)}</div></div>}
+        {participatingChains.length > 0 && <div><div className="font-mono text-xs text-[#555] uppercase tracking-widest mb-3">Chains I'm in</div><div className="space-y-2">{participatingChains.map((chain: any) => <ChainRow key={chain.id} chain={chain} onDelete={deleteChain} />)}</div></div>}
         {myChains.length === 0 && participatingChains.length === 0 && <div className="text-center py-12 font-mono text-xs text-[#444]">No chains yet. <a href="/home" className="underline">Start one.</a></div>}
       </div>
     </div>
   )
 }
 
-function ChainRow({ chain }: { chain: any }) {
+function ChainRow({ chain, onDelete }: { chain: any, onDelete: (id: string) => void }) {
   const linkCount = chain.links?.length || 0
   const statusColor = { active: '#666', completed: '#4ade80', broken: '#ef4444' }[chain.status as string] || '#666'
+  const [confirming, setConfirming] = useState(false)
+
   return (
-    <div className="border border-[#1a1a1a] rounded-lg px-4 py-3 flex items-center justify-between">
+    <div className="border border-[#1a1a1a] rounded-lg px-4 py-3 flex items-center justify-between group">
       <div>
         <div className="font-mono text-sm">{chain.target_name}</div>
         <div className="font-mono text-xs text-[#555] mt-0.5">{linkCount} link{linkCount !== 1 ? 's' : ''} · {new Date(chain.created_at).toLocaleDateString('en', { month: 'short', day: 'numeric' })}</div>
@@ -116,6 +125,14 @@ function ChainRow({ chain }: { chain: any }) {
       <div className="flex items-center gap-3">
         {chain.degrees && <div className="font-mono text-xs text-[#555]">{chain.degrees}°</div>}
         <div className="w-2 h-2 rounded-full" style={{ backgroundColor: statusColor }} />
+        {confirming ? (
+          <div className="flex gap-2">
+            <button onClick={() => onDelete(chain.id)} className="font-mono text-[10px] text-red-400 border border-red-900 px-2 py-0.5 rounded">yes</button>
+            <button onClick={() => setConfirming(false)} className="font-mono text-[10px] text-[#555] border border-[#333] px-2 py-0.5 rounded">no</button>
+          </div>
+        ) : (
+          <button onClick={() => setConfirming(true)} className="font-mono text-[10px] text-[#333] hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100">✕</button>
+        )}
       </div>
     </div>
   )
