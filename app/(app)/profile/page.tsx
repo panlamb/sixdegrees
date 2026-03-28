@@ -63,49 +63,49 @@ export default function ProfilePage() {
     window.location.href = '/'
   }
 
-  if (loading) return <div className="min-h-screen bg-black flex items-center justify-center"><div className="text-[#666] font-mono text-sm">Loading...</div></div>
+  if (loading) return <div className="min-h-screen bg-black flex items-center justify-center"><div className="text-[#888] font-mono text-sm">Loading...</div></div>
 
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="border-b border-[#1a1a1a] px-6 py-4 flex items-center justify-between">
-        <a href="/home" className="font-mono text-xs text-[#666] hover:text-white transition-colors">← back</a>
-        <div className="font-mono text-xs text-[#444]">SIX°</div>
-        <button onClick={signOut} className="font-mono text-xs text-[#666] hover:text-red-400 transition-colors">sign out</button>
+        <a href="/home" className="font-mono text-xs text-[#888] hover:text-white transition-colors">← back</a>
+        <div className="font-mono text-xs text-[#777]">SIX°</div>
+        <button onClick={signOut} className="font-mono text-xs text-[#888] hover:text-red-400 transition-colors">sign out</button>
       </div>
       <div className="max-w-lg mx-auto px-6 py-8 space-y-8">
         <div className="border border-[#1a1a1a] rounded-lg p-6">
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-full bg-[#111] border border-[#222] flex items-center justify-center text-2xl">
+              <div className="w-14 h-14 rounded-full bg-[#1e1e1e] border border-[#2a2a2a] flex items-center justify-center text-2xl">
                 {profile?.name?.[0]?.toUpperCase() || '?'}
               </div>
               <div>
                 {editing ? (
-                  <input value={name} onChange={e => setName(e.target.value)} className="bg-[#111] border border-[#333] rounded px-3 py-1 text-white font-mono text-sm w-48 focus:outline-none" autoFocus />
+                  <input value={name} onChange={e => setName(e.target.value)} className="bg-[#1e1e1e] border border-[#333] rounded px-3 py-1 text-white font-mono text-sm w-48 focus:outline-none" autoFocus />
                 ) : (
                   <div className="font-mono text-lg">{profile?.name || 'Anonymous'}</div>
                 )}
-                <div className="font-mono text-xs text-[#555] mt-1">member since {new Date(profile?.created_at || '').toLocaleDateString('en', { month: 'short', year: 'numeric' })}</div>
+                <div className="font-mono text-xs text-[#888] mt-1">member since {new Date(profile?.created_at || '').toLocaleDateString('en', { month: 'short', year: 'numeric' })}</div>
               </div>
             </div>
             {editing ? (
               <div className="flex gap-2">
-                <button onClick={() => setEditing(false)} className="font-mono text-xs text-[#555] px-3 py-1 border border-[#333] rounded">cancel</button>
+                <button onClick={() => setEditing(false)} className="font-mono text-xs text-[#888] px-3 py-1 border border-[#333] rounded">cancel</button>
                 <button onClick={saveProfile} disabled={saving} className="font-mono text-xs text-black bg-white px-3 py-1 rounded">{saving ? '...' : 'save'}</button>
               </div>
             ) : (
-              <button onClick={() => setEditing(true)} className="font-mono text-xs text-[#555] hover:text-white border border-[#222] px-3 py-1 rounded">edit</button>
+              <button onClick={() => setEditing(true)} className="font-mono text-xs text-[#888] hover:text-white border border-[#2a2a2a] px-3 py-1 rounded">edit</button>
             )}
           </div>
           <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-[#111]">
-            <div className="text-center"><div className="font-mono text-2xl">{myChains.length}</div><div className="font-mono text-xs text-[#555] mt-1">chains created</div></div>
-            <div className="text-center"><div className="font-mono text-2xl">{participatingChains.length}</div><div className="font-mono text-xs text-[#555] mt-1">participating</div></div>
-            <div className="text-center"><div className="font-mono text-2xl">{totalDegrees || '—'}</div><div className="font-mono text-xs text-[#555] mt-1">avg degrees</div></div>
+            <div className="text-center"><div className="font-mono text-2xl">{myChains.length}</div><div className="font-mono text-xs text-[#888] mt-1">chains created</div></div>
+            <div className="text-center"><div className="font-mono text-2xl">{participatingChains.length}</div><div className="font-mono text-xs text-[#888] mt-1">participating</div></div>
+            <div className="text-center"><div className="font-mono text-2xl">{totalDegrees || '—'}</div><div className="font-mono text-xs text-[#888] mt-1">avg degrees</div></div>
           </div>
         </div>
-        {myChains.length > 0 && <div><div className="font-mono text-xs text-[#555] uppercase tracking-widest mb-3">Chains I started</div><div className="space-y-2">{myChains.map((chain: any) => <ChainRow key={chain.id} chain={chain} onDelete={deleteChain} />)}</div></div>}
-        {participatingChains.length > 0 && <div><div className="font-mono text-xs text-[#555] uppercase tracking-widest mb-3">Chains I'm in</div><div className="space-y-2">{participatingChains.map((chain: any) => <ChainRow key={chain.id} chain={chain} onDelete={deleteChain} />)}</div></div>}
-        {myChains.length === 0 && participatingChains.length === 0 && <div className="text-center py-12 font-mono text-xs text-[#444]">No chains yet. <a href="/home" className="underline">Start one.</a></div>}
+        {myChains.length > 0 && <div><div className="font-mono text-xs text-[#888] uppercase tracking-widest mb-3">Chains I started</div><div className="space-y-2">{myChains.map((chain: any) => <ChainRow key={chain.id} chain={chain} onDelete={deleteChain} />)}</div></div>}
+        {participatingChains.length > 0 && <div><div className="font-mono text-xs text-[#888] uppercase tracking-widest mb-3">Chains I'm in</div><div className="space-y-2">{participatingChains.map((chain: any) => <ChainRow key={chain.id} chain={chain} onDelete={deleteChain} />)}</div></div>}
+        {myChains.length === 0 && participatingChains.length === 0 && <div className="text-center py-12 font-mono text-xs text-[#777]">No chains yet. <a href="/home" className="underline">Start one.</a></div>}
       </div>
     </div>
   )
@@ -120,18 +120,18 @@ function ChainRow({ chain, onDelete }: { chain: any, onDelete: (id: string) => v
     <div className="border border-[#1a1a1a] rounded-lg px-4 py-3 flex items-center justify-between group">
       <div>
         <div className="font-mono text-sm">{chain.target_name}</div>
-        <div className="font-mono text-xs text-[#555] mt-0.5">{linkCount} link{linkCount !== 1 ? 's' : ''} · {new Date(chain.created_at).toLocaleDateString('en', { month: 'short', day: 'numeric' })}</div>
+        <div className="font-mono text-xs text-[#888] mt-0.5">{linkCount} link{linkCount !== 1 ? 's' : ''} · {new Date(chain.created_at).toLocaleDateString('en', { month: 'short', day: 'numeric' })}</div>
       </div>
       <div className="flex items-center gap-3">
-        {chain.degrees && <div className="font-mono text-xs text-[#555]">{chain.degrees}°</div>}
+        {chain.degrees && <div className="font-mono text-xs text-[#888]">{chain.degrees}°</div>}
         <div className="w-2 h-2 rounded-full" style={{ backgroundColor: statusColor }} />
         {confirming ? (
           <div className="flex gap-2">
             <button onClick={() => onDelete(chain.id)} className="font-mono text-[10px] text-red-400 border border-red-900 px-2 py-0.5 rounded">yes</button>
-            <button onClick={() => setConfirming(false)} className="font-mono text-[10px] text-[#555] border border-[#333] px-2 py-0.5 rounded">no</button>
+            <button onClick={() => setConfirming(false)} className="font-mono text-[10px] text-[#888] border border-[#333] px-2 py-0.5 rounded">no</button>
           </div>
         ) : (
-          <button onClick={() => setConfirming(true)} className="font-mono text-[10px] text-[#333] hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100">✕</button>
+          <button onClick={() => setConfirming(true)} className="font-mono text-[10px] text-[#888] hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100">✕</button>
         )}
       </div>
     </div>

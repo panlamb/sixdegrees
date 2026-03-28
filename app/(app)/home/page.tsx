@@ -97,19 +97,19 @@ export default function HomePage() {
   return (
     <PageWrapper>
       {/* Status bar */}
-      <div className="sticky top-0 z-50 bg-[#0a0a0a]/95 backdrop-blur border-b border-[#1a1a1a] px-5 h-12 flex items-center justify-between">
+      <div className="sticky top-0 z-50 bg-[#141414]/95 backdrop-blur border-b border-[#2a2a2a] px-5 h-12 flex items-center justify-between">
         <span className="font-mono text-sm font-bold text-lime tracking-widest">SIX°</span>
-        <span className="font-mono text-xs text-[#555]">9:41</span>
+        <span className="font-mono text-xs text-[#aaa]">9:41</span>
       </div>
 
       <div className="px-5 pb-28">
         {/* Hero */}
         <div className="pt-10 pb-8">
           <div className="font-mono text-xs tracking-widest text-lime uppercase mb-3">Experiment #6</div>
-          <h1 className="font-serif text-[40px] font-black leading-[1.0] text-[#f0f0f0] tracking-tight mb-4">
+          <h1 className="font-serif text-[40px] font-black leading-[1.0] text-white tracking-tight mb-4">
             How far<br /><span className="text-lime">are you</span><br />from anyone?
           </h1>
-          <p className="font-mono text-sm text-[#888] leading-relaxed">
+          <p className="font-mono text-sm text-[#aaa] leading-relaxed">
             Build a chain of connections.<br />Verify each link. Discover your degrees.
           </p>
         </div>
@@ -121,11 +121,11 @@ export default function HomePage() {
         </Link>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-px bg-[#1a1a1a] rounded-sm mt-7">
+        <div className="grid grid-cols-3 gap-px bg-[#2a2a2a] rounded-sm mt-7">
           {stats.map((s, i) => (
-            <div key={i} className="bg-[#0f0f0f] px-2 py-4 text-center">
+            <div key={i} className="bg-[#1a1a1a] px-2 py-4 text-center">
               <div className="font-serif text-2xl font-black text-lime">{s.value}</div>
-              <div className="font-mono text-xs text-[#666] mt-1">{s.label}</div>
+              <div className="font-mono text-xs text-[#888] mt-1">{s.label}</div>
             </div>
           ))}
         </div>
@@ -134,11 +134,11 @@ export default function HomePage() {
         {feed.length > 0 && (
           <div className="mt-7">
             <div className="font-mono text-xs text-[#777] uppercase tracking-widest mb-3">Live Activity</div>
-            <div className="flex flex-col gap-0 border border-[#1a1a1a] rounded-sm overflow-hidden">
+            <div className="flex flex-col gap-0 border border-[#2a2a2a] rounded-sm overflow-hidden">
               {feed.map((item, i) => (
-                <div key={i} className="flex items-center gap-3 px-4 py-3 border-b border-[#111] last:border-0">
+                <div key={i} className="flex items-center gap-3 px-4 py-3 border-b border-[#222] last:border-0">
                   <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${item.type === 'link_verified' ? 'bg-lime' : 'bg-[#444]'}`} />
-                  <div className="font-mono text-[10px] text-[#555] flex-1">{item.text}</div>
+                  <div className="font-mono text-[10px] text-[#aaa] flex-1">{item.text}</div>
                   <div className="font-mono text-[9px] text-[#333] flex-shrink-0">
                     {(() => {
                       const diff = Date.now() - new Date(item.time).getTime()
@@ -161,19 +161,19 @@ export default function HomePage() {
           <div className="font-mono text-xs text-[#777] uppercase tracking-widest mb-4">Your Chains</div>
           <div className="flex flex-col gap-3">
             {loading && (
-              <div className="font-mono text-sm text-[#444] py-8 text-center">Loading...</div>
+              <div className="font-mono text-sm text-[#666] py-8 text-center">Loading...</div>
             )}
             {!loading && chains.length === 0 && (
-              <div className="font-mono text-sm text-[#444] py-10 text-center leading-relaxed">
+              <div className="font-mono text-sm text-[#666] py-10 text-center leading-relaxed">
                 No chains yet.<br />Start your first experiment.
               </div>
             )}
             {chains.map(chain => (
-              <div key={chain.id} className="bg-[#111] border border-[#222] rounded-sm p-4">
+              <div key={chain.id} className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-sm p-4">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <div className="font-mono text-xs text-[#666] uppercase tracking-widest mb-1">Target</div>
-                    <div className="font-serif text-lg text-[#f0f0f0]">{chain.target_name}</div>
+                    <div className="font-mono text-xs text-[#888] uppercase tracking-widest mb-1">Target</div>
+                    <div className="font-serif text-lg text-white">{chain.target_name}</div>
                   </div>
                   <div className="flex items-center gap-2">
                     {chain.status === 'completed' && (
@@ -190,7 +190,7 @@ export default function HomePage() {
                   <ChainNodes steps={chain.links.sort((a, b) => a.position - b.position) as any} />
                 )}
                 {chain.status === 'active' && (
-                  <div className="mt-3 font-mono text-xs text-[#666]">Waiting for verifications</div>
+                  <div className="mt-3 font-mono text-xs text-[#888]">Waiting for verifications</div>
                 )}
               </div>
             ))}
@@ -199,7 +199,7 @@ export default function HomePage() {
       </div>
 
       {/* Nav */}
-      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[390px] bg-[#080808]/97 backdrop-blur border-t border-[#1a1a1a] flex justify-around py-4 pb-8 z-50">
+      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[390px] bg-[#141414]/97 backdrop-blur border-t border-[#2a2a2a] flex justify-around py-4 pb-8 z-50">
         {[
           { href: '/home', icon: '⬡', label: 'Home', active: true },
           { href: '/search', icon: '⌕', label: 'Search' },
@@ -210,8 +210,8 @@ export default function HomePage() {
             {item.badge ? (
               <div className="absolute top-0 right-0 w-4 h-4 rounded-full bg-lime flex items-center justify-center font-mono text-[8px] font-bold text-[#0a0a0a]">{item.badge}</div>
             ) : null}
-            <span style={{ fontSize: 22 }} className={item.active ? 'text-lime' : 'text-[#444]'}>{item.icon}</span>
-            <span className={`font-mono text-xs ${item.active ? 'text-lime' : 'text-[#444]'}`}>{item.label}</span>
+            <span style={{ fontSize: 22 }} className={item.active ? 'text-lime' : 'text-[#666]'}>{item.icon}</span>
+            <span className={`font-mono text-xs ${item.active ? 'text-lime' : 'text-[#666]'}`}>{item.label}</span>
           </Link>
         ))}
       </nav>

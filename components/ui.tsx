@@ -12,7 +12,7 @@ export function Avatar({
   return (
     <div style={{ width: size, height: size, fontSize: size * 0.28 }} className={clsx(
       'rounded-full flex items-center justify-center font-mono font-bold flex-shrink-0 border',
-      active ? 'bg-lime text-[#0a0a0a] border-lime' : 'bg-[#1a1a1a] text-[#555] border-[#222]',
+      active ? 'bg-lime text-[#0a0a0a] border-lime' : 'bg-[#252525] text-[#777] border-[#333]',
       faded && 'opacity-30'
     )}>
       {initials}
@@ -41,8 +41,8 @@ export function Button({
         size === 'md' ? 'px-5 py-3.5 text-xs' : 'px-3 py-2 text-[10px]',
         fullWidth && 'w-full',
         variant === 'primary' && !disabled && 'bg-lime text-[#0a0a0a] hover:bg-[#d4f76a]',
-        variant === 'primary' && disabled && 'bg-[#1a1a1a] text-[#333] cursor-default',
-        variant === 'ghost' && 'bg-transparent border border-[#222] text-[#444] hover:border-[#333] hover:text-[#555]',
+        variant === 'primary' && disabled && 'bg-[#252525] text-[#555] cursor-default',
+        variant === 'ghost' && 'bg-transparent border border-[#333] text-[#777] hover:border-[#444] hover:text-[#999]',
       )}
     >
       {children}
@@ -61,7 +61,7 @@ export function Input({
   return (
     <div className="flex flex-col gap-1.5">
       {label && (
-        <label className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#444]">
+        <label className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#777]">
           {label}
         </label>
       )}
@@ -70,7 +70,7 @@ export function Input({
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-4 py-3 bg-[#111] border border-[#1e1e1e] rounded-sm text-xs text-[#f0f0f0] placeholder-[#333] outline-none focus:border-lime transition-colors"
+        className="w-full px-4 py-3 bg-[#333] border border-[#2a2a2a] rounded-sm text-xs text-white placeholder-[#555] outline-none focus:border-lime transition-colors"
       />
     </div>
   )
@@ -94,7 +94,7 @@ export function ChainNodes({ steps }: {
                 faded={step.status === 'waiting'}
               />
               {step.status === 'confirmed' && (
-                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-lime border-2 border-[#0a0a0a] flex items-center justify-center text-[#0a0a0a]" style={{ fontSize: 6 }}>✓</div>
+                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-lime border-2 border-[#141414] flex items-center justify-center text-[#0a0a0a]" style={{ fontSize: 6 }}>✓</div>
               )}
               {step.status === 'pending' && (
                 <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-lime border-2 border-[#111] flex items-center justify-center text-[#0a0a0a] font-bold" style={{ fontSize: 7 }}>?</div>
@@ -102,8 +102,8 @@ export function ChainNodes({ steps }: {
             </div>
             <span className={clsx(
               'font-mono text-[7px] max-w-[36px] overflow-hidden text-ellipsis whitespace-nowrap text-center',
-              step.status === 'confirmed' ? 'text-[#555]' :
-              step.status === 'pending' ? 'text-lime' : 'text-[#2a2a2a]'
+              step.status === 'confirmed' ? 'text-[#888]' :
+              step.status === 'pending' ? 'text-lime' : 'text-[#555]'
             )}>
               {step.name.split(' ')[0]}
             </span>
@@ -111,7 +111,7 @@ export function ChainNodes({ steps }: {
           {i < steps.length - 1 && (
             <div className={clsx(
               'flex-1 h-px mb-4 mx-0.5',
-              step.status === 'confirmed' ? 'bg-lime/25' : 'bg-[#1e1e1e]'
+              step.status === 'confirmed' ? 'bg-lime/25' : 'bg-[#333]'
             )} style={{ minWidth: 8 }} />
           )}
         </div>
@@ -124,7 +124,7 @@ export function ChainNodes({ steps }: {
 
 export function PageWrapper({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] flex justify-center">
+    <div className="min-h-screen bg-[#141414] flex justify-center">
       <div className="w-full max-w-[390px] relative">
         {children}
       </div>
@@ -144,7 +144,7 @@ export function Label({ children }: { children: ReactNode }) {
 
 export function SubLabel({ children }: { children: ReactNode }) {
   return (
-    <div className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#333]">
+    <div className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#555]">
       {children}
     </div>
   )

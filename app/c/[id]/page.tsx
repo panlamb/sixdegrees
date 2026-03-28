@@ -51,7 +51,7 @@ export default function ShareLinkPage({ params }: { params: { id: string } }) {
   if (!chain) return (
     <PageWrapper>
       <div className="flex items-center justify-center min-h-screen">
-        <div className="font-mono text-[10px] text-[#333]">Loading chain...</div>
+        <div className="font-mono text-[10px] text-[#888]">Loading chain...</div>
       </div>
     </PageWrapper>
   )
@@ -62,9 +62,9 @@ export default function ShareLinkPage({ params }: { params: { id: string } }) {
 
   return (
     <PageWrapper>
-      <div className="sticky top-0 z-50 bg-[#0a0a0a]/95 backdrop-blur border-b border-[#0f0f0f] px-6 py-3 flex justify-between items-center">
+      <div className="sticky top-0 z-50 bg-[#141414]/95 backdrop-blur border-b border-[#1a1a1a] px-6 py-3 flex justify-between items-center">
         <span className="font-mono text-xs text-lime font-bold tracking-[0.15em]">SIX°</span>
-        <span className="font-mono text-[9px] text-[#2a2a2a]">sixdegrees.app</span>
+        <span className="font-mono text-[9px] text-[#555]">sixdegrees.app</span>
       </div>
 
       {/* LANDING */}
@@ -72,29 +72,29 @@ export default function ShareLinkPage({ params }: { params: { id: string } }) {
         <div className="px-6 pb-16">
           <div className="pt-12 pb-8">
             <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-lime mb-3.5">SIX° · CHAIN INVITE</div>
-            <h1 className="font-serif text-[34px] font-black leading-[1.05] text-[#f0f0f0] tracking-tight mb-3.5">
+            <h1 className="font-serif text-[34px] font-black leading-[1.05] text-white tracking-tight mb-3.5">
               <span className="text-lime">{chain.owner?.name || 'Someone'}</span><br />
               is trying to reach<br />
               {chain.target_name}.
             </h1>
-            <p className="font-mono text-[11px] text-[#555] leading-[1.7]">
+            <p className="font-mono text-[11px] text-[#888] leading-[1.7]">
               They think you're a link in the chain.<br />Are they right?
             </p>
           </div>
 
           {/* Chain card */}
-          <div className="bg-[#111] border border-[#1e1e1e] rounded-xl p-5 mb-5">
+          <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl p-5 mb-5">
             <div className="flex justify-between items-start mb-5">
               <div>
-                <div className="font-mono text-[8px] text-[#333] uppercase tracking-[0.15em] mb-1">THE CHAIN</div>
-                <div className="font-mono text-[9px] text-[#444]">{chain.chain_code}</div>
+                <div className="font-mono text-[8px] text-[#888] uppercase tracking-[0.15em] mb-1">THE CHAIN</div>
+                <div className="font-mono text-[9px] text-[#777]">{chain.chain_code}</div>
               </div>
               <div className="font-serif text-[36px] font-black text-lime leading-none tracking-tighter">
                 {chain.degrees}°
               </div>
             </div>
             <ChainNodes steps={steps} />
-            <div className="mt-4 px-3.5 py-2.5 bg-[#0d1a00] rounded-md border-l-2 border-lime/20">
+            <div className="mt-4 px-3.5 py-2.5 bg-[#1a2a00] rounded-md border-l-2 border-lime/20">
               <div className="font-mono text-[10px] text-[#777] leading-relaxed">
                 {chain.owner?.name} says you can help connect to {chain.target_name}.
               </div>
@@ -102,9 +102,9 @@ export default function ShareLinkPage({ params }: { params: { id: string } }) {
           </div>
 
           {/* What is this */}
-          <div className="bg-[#0a0a0a] border border-[#141414] rounded-xl p-4 mb-6">
-            <div className="font-mono text-[8px] text-[#2a2a2a] uppercase tracking-[0.15em] mb-2">WHAT IS SIX°?</div>
-            <div className="font-mono text-[11px] text-[#555] leading-[1.7]">
+          <div className="bg-[#141414] border border-[#2a2a2a] rounded-xl p-4 mb-6">
+            <div className="font-mono text-[8px] text-[#555] uppercase tracking-[0.15em] mb-2">WHAT IS SIX°?</div>
+            <div className="font-mono text-[11px] text-[#888] leading-[1.7]">
               A social experiment. Any two people on Earth are connected through at most 6 intermediaries. Six° lets you prove it — one verified link at a time.
             </div>
           </div>
@@ -127,23 +127,23 @@ export default function ShareLinkPage({ params }: { params: { id: string } }) {
             <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-lime mb-3.5">
               {view === 'signup-confirm' ? 'CONFIRM YOUR LINK' : 'JOIN SIX°'}
             </div>
-            <h1 className="font-serif text-[30px] font-black leading-[1.1] text-[#f0f0f0] tracking-tight">
+            <h1 className="font-serif text-[30px] font-black leading-[1.1] text-white tracking-tight">
               {view === 'signup-confirm'
                 ? <>Create your account<br />to confirm.</>
                 : <>Start your own<br />experiment.</>
               }
             </h1>
             {view === 'signup-confirm' && (
-              <p className="font-mono text-[10px] text-[#444] mt-3 leading-relaxed">
+              <p className="font-mono text-[10px] text-[#777] mt-3 leading-relaxed">
                 Your confirmation keeps {chain.owner?.name}'s chain alive.
               </p>
             )}
           </div>
 
           {view === 'signup-confirm' && (
-            <div className="bg-[#0d1a00] border border-[#1e2e00] rounded-lg px-4 py-3 mb-6 flex items-center gap-3">
+            <div className="bg-[#1a2a00] border border-[#1e2e00] rounded-lg px-4 py-3 mb-6 flex items-center gap-3">
               <div className="font-mono text-[9px] text-lime flex-1">
-                {chain.owner?.name} → <span className="text-[#555]">you</span> → {chain.target_name}
+                {chain.owner?.name} → <span className="text-[#888]">you</span> → {chain.target_name}
               </div>
               <div className="font-serif text-lg font-black text-lime">{chain.degrees}°</div>
             </div>
@@ -163,7 +163,7 @@ export default function ShareLinkPage({ params }: { params: { id: string } }) {
             {loading ? 'Creating account...' : view === 'signup-confirm' ? 'Create account & confirm →' : 'Join Six° →'}
           </Button>
 
-          <p className="mt-4 font-mono text-[9px] text-[#2a2a2a] text-center">No spam. No feed. Just connections.</p>
+          <p className="mt-4 font-mono text-[9px] text-[#555] text-center">No spam. No feed. Just connections.</p>
         </div>
       )}
 
@@ -172,10 +172,10 @@ export default function ShareLinkPage({ params }: { params: { id: string } }) {
         <div className="px-6 pb-16">
           <div className="pt-12 pb-8">
             <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-lime mb-3.5">LINK CONFIRMED</div>
-            <h1 className="font-serif text-[34px] font-black leading-[1.05] text-[#f0f0f0] tracking-tight mb-3">
+            <h1 className="font-serif text-[34px] font-black leading-[1.05] text-white tracking-tight mb-3">
               You're in<br /><span className="text-lime">the chain.</span>
             </h1>
-            <p className="font-mono text-[11px] text-[#555] leading-[1.7]">
+            <p className="font-mono text-[11px] text-[#888] leading-[1.7]">
               {chain.owner?.name}'s chain is one step closer to {chain.target_name}.
             </p>
           </div>
@@ -188,14 +188,14 @@ export default function ShareLinkPage({ params }: { params: { id: string } }) {
             <ChainNodes steps={steps.map(s => ({ ...s, status: 'confirmed' }))} />
           </div>
 
-          <div className="font-mono text-[9px] text-[#333] uppercase tracking-[0.15em] mb-3">SHARE THIS CHAIN</div>
+          <div className="font-mono text-[9px] text-[#888] uppercase tracking-[0.15em] mb-3">SHARE THIS CHAIN</div>
           <button
             onClick={copyLink}
-            className={`w-full py-3.5 rounded-lg font-mono text-[11px] font-bold uppercase tracking-widest transition-all mb-2.5 ${copied ? 'bg-transparent border border-lime text-lime' : 'bg-lime text-[#0a0a0a]'}`}
+            className={`w-full py-3.5 rounded-lg font-mono text-[11px] font-bold uppercase tracking-widest transition-all mb-2.5 ${copied ? 'bg-transparent border border-lime text-lime' : 'bg-lime text-[#141414]'}`}
           >
             {copied ? '✓ COPIED' : 'COPY LINK'}
           </button>
-          <button className="w-full py-3.5 rounded-lg font-mono text-[11px] uppercase tracking-widest border border-[#1e1e1e] text-[#444]">
+          <button className="w-full py-3.5 rounded-lg font-mono text-[11px] uppercase tracking-widest border border-[#2a2a2a] text-[#777]">
             Open the app →
           </button>
         </div>

@@ -52,10 +52,10 @@ export default function AuthPage() {
         <div className="px-6 pb-16">
           <div className="pt-14 pb-8">
             <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-lime mb-4">SIX°</div>
-            <h1 className="font-serif text-3xl font-black leading-[1.05] text-[#f0f0f0] tracking-tight mb-3">
+            <h1 className="font-serif text-3xl font-black leading-[1.05] text-white tracking-tight mb-3">
               Who do you want<br />to <span className="text-lime">reach?</span>
             </h1>
-            <p className="font-mono text-[10px] text-[#444] leading-relaxed">
+            <p className="font-mono text-[10px] text-[#777] leading-relaxed">
               Pick a target and start building your chain.
             </p>
           </div>
@@ -64,19 +64,19 @@ export default function AuthPage() {
               <button
                 key={t.name}
                 onClick={() => router.push('/search?target=' + encodeURIComponent(t.name))}
-                className="bg-[#111] border border-[#1e1e1e] rounded-lg p-4 text-left hover:border-lime/30 transition-colors"
+                className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-lg p-4 text-left hover:border-lime/30 transition-colors"
               >
-                <div className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center font-mono text-sm text-[#555] mb-3">
+                <div className="w-10 h-10 rounded-full bg-[#252525] flex items-center justify-center font-mono text-sm text-[#888] mb-3">
                   {t.name.slice(0, 2).toUpperCase()}
                 </div>
-                <div className="font-mono text-[11px] text-[#f0f0f0] mb-1">{t.name}</div>
-                <div className="font-mono text-[9px] text-[#444]">{t.label}</div>
+                <div className="font-mono text-[11px] text-white mb-1">{t.name}</div>
+                <div className="font-mono text-[9px] text-[#777]">{t.label}</div>
               </button>
             ))}
           </div>
           <button
             onClick={() => router.push('/home')}
-            className="w-full py-3 font-mono text-[10px] text-[#444] uppercase tracking-widest border border-[#1a1a1a] rounded-sm"
+            className="w-full py-3 font-mono text-[10px] text-[#777] uppercase tracking-widest border border-[#1a1a1a] rounded-sm"
           >
             Skip for now
           </button>
@@ -90,8 +90,8 @@ export default function AuthPage() {
       <PageWrapper>
         <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center">
           <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-lime mb-4">ALMOST THERE</div>
-          <h1 className="font-serif text-3xl font-black text-[#f0f0f0] mb-3">Check your email.</h1>
-          <p className="font-mono text-xs text-[#444] leading-relaxed">
+          <h1 className="font-serif text-3xl font-black text-white mb-3">Check your email.</h1>
+          <p className="font-mono text-xs text-[#777] leading-relaxed">
             We sent a confirmation link to<br />
             <span className="text-[#888]">{email}</span>
           </p>
@@ -105,14 +105,14 @@ export default function AuthPage() {
       <div className="px-6 pb-16">
         <div className="pt-14 pb-10">
           <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-lime mb-4">SIX°</div>
-          <h1 className="font-serif text-4xl font-black leading-[1.05] text-[#f0f0f0] tracking-tight">
+          <h1 className="font-serif text-4xl font-black leading-[1.05] text-white tracking-tight">
             {mode === 'signup' ? <>Join the<br /><span className="text-lime">experiment.</span></> : <>Welcome<br />back.</>}
           </h1>
         </div>
 
         <div className="flex gap-2 mb-8">
           {(['signup', 'login'] as const).map(m => (
-            <button key={m} onClick={() => setMode(m)} className={`flex-1 py-2.5 font-mono text-[10px] uppercase tracking-widest rounded-sm transition-all border ${mode === m ? 'bg-lime text-[#0a0a0a] border-lime' : 'bg-transparent border-[#1e1e1e] text-[#444]'}`}>
+            <button key={m} onClick={() => setMode(m)} className={`flex-1 py-2.5 font-mono text-[10px] uppercase tracking-widest rounded-sm transition-all border ${mode === m ? 'bg-lime text-[#141414] border-lime' : 'bg-transparent border-[#2a2a2a] text-[#777]'}`}>
               {m === 'signup' ? 'Sign Up' : 'Log In'}
             </button>
           ))}
@@ -136,7 +136,7 @@ export default function AuthPage() {
           {loading ? 'Please wait...' : mode === 'signup' ? 'Create account →' : 'Log in →'}
         </Button>
 
-        <p className="mt-5 font-mono text-[9px] text-[#2a2a2a] text-center">
+        <p className="mt-5 font-mono text-[9px] text-[#555] text-center">
           No spam. No feed. Just connections.
         </p>
       </div>
