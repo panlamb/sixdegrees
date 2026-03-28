@@ -229,6 +229,7 @@ export default function SearchPage() {
                 onClick={() => setAdding(true)}
                 className="w-full py-3.5 border border-dashed border-[#2a2a2a] rounded-sm font-mono text-[11px] uppercase tracking-widest text-[#444] mb-3"
               >+ Add intermediary</button>
+              <div className="font-mono text-[9px] text-[#333] text-center mt-2 leading-relaxed">Someone you personally know who might be closer to your target.</div>
             )}
 
             {links.length > 0 && !adding && (
