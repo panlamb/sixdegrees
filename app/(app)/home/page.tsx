@@ -72,7 +72,7 @@ export default function HomePage() {
           {stats.map((s, i) => (
             <div key={i} className="bg-[#0f0f0f] px-2 py-4 text-center">
               <div className="font-serif text-2xl font-black text-lime">{s.value}</div>
-              <div className="font-mono text-[11px] text-[#666] mt-1">{s.label}</div>
+              <div className="font-mono text-xs text-[#666] mt-1">{s.label}</div>
             </div>
           ))}
         </div>
@@ -93,7 +93,7 @@ export default function HomePage() {
               <div key={chain.id} className="bg-[#111] border border-[#222] rounded-sm p-4">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <div className="font-mono text-[11px] text-[#666] uppercase tracking-widest mb-1">Target</div>
+                    <div className="font-mono text-xs text-[#666] uppercase tracking-widest mb-1">Target</div>
                     <div className="font-serif text-lg text-[#f0f0f0]">{chain.target_name}</div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -120,7 +120,7 @@ export default function HomePage() {
       </div>
 
       {/* Nav */}
-      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[390px] bg-[#080808]/97 backdrop-blur border-t border-[#1a1a1a] flex justify-around py-3 pb-6 z-50">
+      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[390px] bg-[#080808]/97 backdrop-blur border-t border-[#1a1a1a] flex justify-around py-4 pb-8 z-50">
         {[
           { href: '/home', icon: '⬡', label: 'Home', active: true },
           { href: '/search', icon: '⌕', label: 'Search' },
@@ -131,8 +131,8 @@ export default function HomePage() {
             {item.badge ? (
               <div className="absolute top-0 right-0 w-4 h-4 rounded-full bg-lime flex items-center justify-center font-mono text-[8px] font-bold text-[#0a0a0a]">{item.badge}</div>
             ) : null}
-            <span style={{ fontSize: 18 }} className={item.active ? 'text-lime' : 'text-[#444]'}>{item.icon}</span>
-            <span className={`font-mono text-[11px] ${item.active ? 'text-lime' : 'text-[#444]'}`}>{item.label}</span>
+            <span style={{ fontSize: 22 }} className={item.active ? 'text-lime' : 'text-[#444]'}>{item.icon}</span>
+            <span className={`font-mono text-xs ${item.active ? 'text-lime' : 'text-[#444]'}`}>{item.label}</span>
           </Link>
         ))}
       </nav>
