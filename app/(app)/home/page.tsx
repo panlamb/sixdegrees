@@ -11,6 +11,7 @@ export default function HomePage() {
   const [pendingCount, setPendingCount] = useState(0)
   const [loading, setLoading] = useState(true)
   const [globalStats, setGlobalStats] = useState({ chains: 0, verifications: 0, countries: 0 })
+  const [feed, setFeed] = useState<any[]>([])
   const supabase = createClient()
   const router = useRouter()
 
@@ -40,6 +41,41 @@ export default function HomePage() {
       .from('verifications')
       .select('*', { count: 'exact', head: true })
       .eq('status', 'confirmed')
+
+    // Load activity feed
+    const { data: recentChains } = await supabase
+      .from('chains')
+      .select('*, owner:profiles!owner_id(*)')
+      .order('created_at', { ascending: false })
+      .limit(5)
+
+    const { data: recentVerifications } = await supabase
+      .from('verifications')
+      .select('*, chain:chains(*)')
+      .eq('status', 'confirmed')
+      .order('created_at', { ascending: false })
+      .limit(5)
+
+    const feedItems: any[] = []
+
+    recentChains?.forEach(c => {
+      feedItems.push({
+        type: 'chain_started',
+        text: `New chain targeting ${c.target_name}`,
+        time: c.created_at,
+      })
+    })
+
+    recentVerifications?.forEach(v => {
+      feedItems.push({
+        type: 'link_verified',
+        text: `A link was verified toward ${v.chain?.target_name || 'someone'}`,
+        time: v.created_at,
+      })
+    })
+
+    feedItems.sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
+    setFeed(feedItems.slice(0, 8))
 
     setGlobalStats({
       chains: chainCount || 0,
@@ -93,6 +129,32 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+
+        {/* Activity Feed */}
+        {feed.length > 0 && (
+          <div className="mt-7">
+            <div className="font-mono text-xs text-[#777] uppercase tracking-widest mb-3">Live Activity</div>
+            <div className="flex flex-col gap-0 border border-[#1a1a1a] rounded-sm overflow-hidden">
+              {feed.map((item, i) => (
+                <div key={i} className="flex items-center gap-3 px-4 py-3 border-b border-[#111] last:border-0">
+                  <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${item.type === 'link_verified' ? 'bg-lime' : 'bg-[#444]'}`} />
+                  <div className="font-mono text-[10px] text-[#555] flex-1">{item.text}</div>
+                  <div className="font-mono text-[9px] text-[#333] flex-shrink-0">
+                    {(() => {
+                      const diff = Date.now() - new Date(item.time).getTime()
+                      const mins = Math.floor(diff / 60000)
+                      const hours = Math.floor(diff / 3600000)
+                      const days = Math.floor(diff / 86400000)
+                      if (mins < 60) return `${mins}m ago`
+                      if (hours < 24) return `${hours}h ago`
+                      return `${days}d ago`
+                    })()}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Chains */}
         <div className="mt-8">
