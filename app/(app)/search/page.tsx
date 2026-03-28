@@ -107,6 +107,21 @@ export default function SearchPage() {
       </div>
 
       <div className="px-5 pb-28">
+        {/* Instructions */}
+        <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-lg px-4 py-3 mb-6 mt-6">
+          <div className="font-mono text-[9px] uppercase tracking-widest text-lime mb-2">How to build a chain</div>
+          <div className="space-y-1.5">
+            {[
+              '① Search for your target — anyone you want to reach.',
+              '② Add intermediaries — people you personally know who might be closer to the target.',
+              '③ Send — each person gets a link to verify their connection.',
+              '④ The chain is complete when every link is verified.',
+            ].map((step, i) => (
+              <div key={i} className="font-mono text-[10px] text-[#888] leading-relaxed">{step}</div>
+            ))}
+          </div>
+        </div>
+
         <div className="pt-12 pb-6">
           <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-lime mb-2">NEW CHAIN</div>
           <h1 className="font-serif text-[30px] font-black text-white tracking-tight">

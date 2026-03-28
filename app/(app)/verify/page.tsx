@@ -58,6 +58,22 @@ export default function VerifyPage() {
           </div>
         </div>
 
+        {/* Instructions */}
+        {!loading && (
+          <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-lg px-4 py-3 mb-6">
+            <div className="font-mono text-[9px] uppercase tracking-widest text-lime mb-2">How it works</div>
+            <div className="space-y-1.5">
+              {[
+                '1. Someone added you to their chain of connections.',
+                '2. Confirm if you personally know them.',
+                '3. If yes, you'll be asked to pass the chain one step closer.',
+              ].map((step, i) => (
+                <div key={i} className="font-mono text-[10px] text-[#888] leading-relaxed">{step}</div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {loading && <div className="font-mono text-[10px] text-[#888] py-10 text-center">Loading...</div>}
 
         {!loading && pending.length === 0 && resolved.length === 0 && (
