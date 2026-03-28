@@ -10,8 +10,9 @@ export default function SearchPage() {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<Profile[]>([])
   const [selected, setSelected] = useState<Profile | null>(null)
-  const [links, setLinks] = useState<{ name: string }[]>([])
+  const [links, setLinks] = useState<{ name: string, email?: string }[]>([])
   const [newLink, setNewLink] = useState('')
+  const [newLinkEmail, setNewLinkEmail] = useState('')
   const [adding, setAdding] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -31,8 +32,9 @@ export default function SearchPage() {
 
   const addLink = () => {
     if (!newLink.trim()) return
-    setLinks(prev => [...prev, { name: newLink.trim() }])
+    setLinks(prev => [...prev, { name: newLink.trim(), email: newLinkEmail.trim() || undefined }])
     setNewLink('')
+    setNewLinkEmail('')
     setAdding(false)
   }
 
@@ -57,6 +59,23 @@ export default function SearchPage() {
     })
 
     if (res.ok) {
+      const chainData = await res.json()
+      // Send email notifications to each link that has an email
+      for (const link of links) {
+        if (link.email) {
+          const appUrl = process.env.NEXT_PUBLIC_APP_URL || window.location.origin
+          await fetch('/api/send-verification-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              to: link.email,
+              chainName: targetName,
+              verifyUrl: `${appUrl}/c/${chainData.chain_code}`,
+              requesterName: 'Someone'
+            })
+          })
+        }
+      }
       setSubmitted(true)
       setTimeout(() => router.push('/home'), 2000)
     }
@@ -190,6 +209,13 @@ export default function SearchPage() {
                   value={newLink}
                   onChange={setNewLink}
                 />
+                <div className="mt-2">
+                  <Input
+                    placeholder="Email (optional, for notification)..."
+                    value={newLinkEmail}
+                    onChange={setNewLinkEmail}
+                  />
+                </div>
                 <div className="flex gap-2 mt-3">
                   <Button onClick={addLink} fullWidth>Add →</Button>
                   <button
