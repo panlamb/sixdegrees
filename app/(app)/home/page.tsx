@@ -58,6 +58,12 @@ export default function HomePage() {
     { label: 'Active Now', value: chains.filter(c => c.status === 'active').length.toString() },
   ]
 
+  const anonymize = (name: string) => {
+    const parts = name.trim().split(' ')
+    if (parts.length === 1) return parts[0]
+    return parts[0] + ' ' + parts[1][0] + '.'
+  }
+
   return (
     <PageWrapper>
       {/* Status bar */}

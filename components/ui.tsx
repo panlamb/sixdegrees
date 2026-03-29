@@ -105,7 +105,11 @@ export function ChainNodes({ steps }: {
               step.status === 'confirmed' ? 'text-[#888]' :
               step.status === 'pending' ? 'text-lime' : 'text-[#555]'
             )}>
-              {step.name.split(' ')[0]}
+              {(() => {
+              const parts = step.name.split(' ')
+              if (parts.length === 1) return parts[0]
+              return parts[0] + ' ' + parts[1][0] + '.'
+            })()}
             </span>
           </div>
           {i < steps.length - 1 && (
