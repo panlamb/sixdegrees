@@ -192,7 +192,14 @@ export default function ShareLinkPage({ params }: { params: { id: string } }) {
             </p>
           </div>
 
-          <div className="font-mono text-[9px] text-[#555] uppercase tracking-[0.15em] mb-3">SHARE THIS CHAIN</div>
+          <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-lg px-4 py-3 mb-6">
+            <div className="font-mono text-[9px] uppercase tracking-widest text-lime mb-2">Next step</div>
+            <div className="font-mono text-[10px] text-[#888] leading-relaxed">
+              Now pass the chain forward. Think of someone who might be closer to <strong className="text-white">{chain.target_name}</strong> — and send them this link.
+            </div>
+          </div>
+
+          <div className="font-mono text-[9px] text-[#555] uppercase tracking-[0.15em] mb-3">SEND THIS LINK TO THE NEXT PERSON</div>
           <button
             onClick={copyLink}
             className={`w-full py-3.5 rounded-lg font-mono text-[11px] font-bold uppercase tracking-widest transition-all mb-2.5 ${copied ? 'bg-transparent border border-lime text-lime' : 'bg-lime text-[#141414]'}`}
