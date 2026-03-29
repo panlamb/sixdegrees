@@ -58,6 +58,16 @@ export default function ProfilePage() {
     setSaving(false)
   }
 
+  async function deleteAccount() {
+    if (!profile) return
+    // Delete all user data
+    await supabase.from('chain_links').delete().eq('user_id', profile.id)
+    await supabase.from('chains').delete().eq('owner_id', profile.id)
+    await supabase.from('profiles').delete().eq('id', profile.id)
+    await supabase.auth.signOut()
+    window.location.href = '/'
+  }
+
   async function signOut() {
     await supabase.auth.signOut()
     window.location.href = '/'
@@ -108,6 +118,19 @@ export default function ProfilePage() {
         {myChains.length === 0 && participatingChains.length === 0 && <div className="text-center py-12 font-mono text-xs text-[#777]">No chains yet. <a href="/home" className="underline">Start one.</a></div>}
       </div>
     </div>
+  )
+}
+
+function DeleteAccountButton({ onDelete }: { onDelete: () => void }) {
+  const [confirming, setConfirming] = useState(false)
+  return confirming ? (
+    <div className="flex items-center gap-2">
+      <span className="font-mono text-[10px] text-[#666]">sure?</span>
+      <button onClick={onDelete} className="font-mono text-[10px] text-red-400 border border-red-900 px-2 py-0.5 rounded">yes</button>
+      <button onClick={() => setConfirming(false)} className="font-mono text-[10px] text-[#555] border border-[#333] px-2 py-0.5 rounded">no</button>
+    </div>
+  ) : (
+    <button onClick={() => setConfirming(true)} className="font-mono text-xs text-[#333] hover:text-red-400 transition-colors">delete account</button>
   )
 }
 

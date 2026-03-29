@@ -12,6 +12,7 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [done, setDone] = useState(false)
+  const [consent, setConsent] = useState(false)
   const [onboarding, setOnboarding] = useState(false)
   const router = useRouter()
   const supabase = createClient()
@@ -132,7 +133,24 @@ export default function AuthPage() {
           </div>
         )}
 
-        <Button onClick={handleSubmit} disabled={loading} fullWidth>
+        {mode === 'signup' && (
+          <div className="flex items-start gap-3 mb-5">
+            <button
+              onClick={() => setConsent(!consent)}
+              className={`w-4 h-4 mt-0.5 flex-shrink-0 border rounded-sm transition-colors ${consent ? 'bg-lime border-lime' : 'border-[#333] bg-transparent'}`}
+            >
+              {consent && <span className="text-[#141414] text-[8px] font-bold flex items-center justify-center w-full h-full">✓</span>}
+            </button>
+            <p className="font-mono text-[10px] text-[#666] leading-relaxed">
+              I agree to the{' '}
+              <a href="/legal/terms" className="text-lime underline" target="_blank">Terms of Service</a>
+              {' '}and{' '}
+              <a href="/legal/privacy" className="text-lime underline" target="_blank">Privacy Policy</a>.
+            </p>
+          </div>
+        )}
+
+        <Button onClick={handleSubmit} disabled={loading || (mode === 'signup' && !consent)} fullWidth>
           {loading ? 'Please wait...' : mode === 'signup' ? 'Create account →' : 'Log in →'}
         </Button>
 
