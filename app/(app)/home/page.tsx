@@ -61,7 +61,7 @@ export default function HomePage() {
     recentChains?.forEach(c => {
       feedItems.push({
         type: 'chain_started',
-        text: `New chain targeting ${c.target_name}`,
+        text: 'A new chain was started.',
         time: c.created_at,
       })
     })
@@ -69,7 +69,7 @@ export default function HomePage() {
     recentVerifications?.forEach(v => {
       feedItems.push({
         type: 'link_verified',
-        text: `A connection was verified toward ${v.chain?.target_name || 'a target'}`,
+        text: 'A connection was verified.',
         time: v.created_at,
       })
     })
