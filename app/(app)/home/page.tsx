@@ -69,7 +69,7 @@ export default function HomePage() {
     recentVerifications?.forEach(v => {
       feedItems.push({
         type: 'link_verified',
-        text: `A link was verified toward ${v.chain?.target_name || 'someone'}`,
+        text: `A connection was verified toward ${v.chain?.target_name || 'a target'}`,
         time: v.created_at,
       })
     })
