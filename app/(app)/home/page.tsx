@@ -121,7 +121,7 @@ export default function HomePage() {
                   </div>
                   <div className="flex items-center gap-2">
                     {chain.status === 'completed' && (
-                      <Link href={`/share/${chain.id}`}>
+                      <Link href={`/c/${chain.id}`}>
                         <button className="border border-[#333] rounded-sm px-3 py-1 font-mono text-xs text-[#777] hover:text-[#aaa] hover:border-[#555] transition-colors">Share</button>
                       </Link>
                     )}
