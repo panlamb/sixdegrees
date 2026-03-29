@@ -66,7 +66,7 @@ export default function VerifyPage() {
               {[
                 '1. Someone added you to their chain of connections.',
                 '2. Confirm if you personally know them.',
-                '3. If yes, you'll be asked to pass the chain one step closer.',
+                "3. If yes, you'll be asked to pass the chain one step closer.",
               ].map((step, i) => (
                 <div key={i} className="font-mono text-[10px] text-[#888] leading-relaxed">{step}</div>
               ))}
