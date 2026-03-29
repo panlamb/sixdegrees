@@ -63,14 +63,14 @@ export default function SearchPage() {
       // Send email notifications to each link that has an email
       for (const link of links) {
         if (link.email) {
-          const appUrl = process.env.NEXT_PUBLIC_APP_URL || window.location.origin
+          const appUrl = window.location.origin
           await fetch('/api/send-verification-email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               to: link.email,
               chainName: targetName,
-              verifyUrl: `${appUrl}/c/${chainData.chain_code}`,
+              verifyUrl: `${appUrl}/c/${chainData.chain?.id}`,
               requesterName: 'Someone'
             })
           })
